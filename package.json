@@ -1,0 +1,23 @@
+{
+  "name": "reactnativetest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "android": "react-native run-android",
+    "index-js-bundle": "CI=true npx react-native bundle --platform android --config metro.config.js --dev false --max-workers 2 --entry-file index.js --bundle-output android/rnhome/src/main/assets/index.android.bundle --assets-dest=android/rnhome/src/main/res"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "19.0.0",
+    "react-native": "0.79.6",
+    "react-native-svg": "^13.8.0"
+  },
+  "devDependencies": {
+    "@react-native-community/cli": "18.0.0",
+    "@react-native-community/cli-platform-android": "18.0.0",
+    "@react-native/metro-config": "0.79.6"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}

@@ -1,0 +1,73 @@
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+}
+project.ext.react = [
+        enableHermes: true,
+        hermesFlags: ["-O", "-output-source-map"],
+        newArchEnabled: true
+]
+android {
+    namespace 'com.rnkotlin.rnlibrary'
+    compileSdk 36
+
+    defaultConfig {
+        minSdk 24
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    packagingOptions {
+        pickFirst '**/libc++_shared.so'
+        pickFirst '**/libfbjni.so'
+        pickFirst '**/libjsc.so'
+        pickFirst '**/libreactnative.so'
+        pickFirst '**/libhermes.so'
+        pickFirst '**/libjscexecutor.so'
+    }
+}
+
+dependencies {
+
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+
+    api files('libs/react-android-0.79.6-release.aar')
+    api  'io.github.react-native-community:jsc-android:2026004.+'
+    api 'androidx.appcompat:appcompat:1.6.1'
+    api 'androidx.appcompat:appcompat-resources:1.6.1'
+    api 'androidx.autofill:autofill:1.1.0'
+    api 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    api 'androidx.tracing:tracing:1.1.0'
+    api 'com.facebook.fbjni:fbjni:0.7.0'
+    api 'com.facebook.fresco:fresco:3.6.0'
+    api 'com.facebook.fresco:middleware:3.6.0'
+    api 'com.facebook.fresco:imagepipeline-okhttp3:3.6.0'
+    api 'com.facebook.fresco:ui-common:3.6.0'
+    api 'com.facebook.infer.annotation:infer-annotation:0.18.0'
+    api 'com.facebook.soloader:soloader:0.12.1'
+    api 'com.facebook.yoga:proguard-annotations:1.19.0'
+    api 'com.google.code.findbugs:jsr305:3.0.2'
+    api 'com.squareup.okhttp3:okhttp-urlconnection:4.9.2'
+    api 'com.squareup.okhttp3:okhttp:4.9.2'
+    api 'com.squareup.okio:okio:2.9.0'
+    api 'javax.inject:javax.inject:1'
+}

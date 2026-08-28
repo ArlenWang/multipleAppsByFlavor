@@ -1,0 +1,23 @@
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+}
+
+android {
+    namespace 'com.smarola.main'
+    compileSdk 36
+    defaultConfig { minSdk 24 }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions { jvmTarget = '11' }
+}
+
+dependencies {
+    implementation project(path: ':core')
+    implementation project(path: ':webview')
+    implementation project(path: ':rnhome')
+    implementation libs.androidx.appcompat
+    implementation libs.material
+}

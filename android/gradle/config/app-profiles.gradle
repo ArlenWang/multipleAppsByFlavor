@@ -1,0 +1,24 @@
+/**
+ * All brand differences for the single-app Product Flavor architecture.
+ * Add another entry to generate another brand flavor.
+ */
+ext.appProfiles = [
+        demoA: [
+                applicationId    : "com.smarola.demo.a",
+                appName          : "Smarola A",
+                scheme           : "smarolaa",
+                primaryColor     : "#6750A4",
+                defaultWebUrl    : "https://example.com",
+                rnEnabled        : true,
+                versionNameSuffix: "-a"
+        ],
+        demoB: [
+                applicationId    : "com.smarola.demo.b",
+                appName          : "Smarola B",
+                scheme           : "smarolab",
+                primaryColor     : "#006C4C",
+                defaultWebUrl    : "https://www.example.org",
+                rnEnabled        : true,
+                versionNameSuffix: "-b"
+        ]
+]
