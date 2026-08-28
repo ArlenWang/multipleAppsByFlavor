@@ -1,0 +1,2 @@
+# multipleAppsByFlavor
+通过Flavor实现多个app
