@@ -34,6 +34,7 @@ import androidx.core.net.toUri
 import com.smarola.core.AppNavigator
 import com.smarola.core.dp
 import com.smarola.core.toast
+import com.smarola.webview.offline.OfflinePackageManager
 
 class WebViewActivity : AppCompatActivity() {
     private lateinit var webView: WebView
@@ -74,6 +75,13 @@ class WebViewActivity : AppCompatActivity() {
         webView.setDownloadListener(createDownloadListener())
 
         val html = intent.getStringExtra(AppNavigator.EXTRA_HTML)
+        val url = intent.getStringExtra(AppNavigator.EXTRA_URL)
+        if (url?.startsWith("https://offline.smarola.local/demo") == true) {
+            OfflinePackageManager.installBundledDemo(applicationContext).onFailure {
+                showError("离线包安装失败：${it.message}")
+                return
+            }
+        }
         val bridgeRequested = intent.getBooleanExtra(AppNavigator.EXTRA_ENABLE_BRIDGE, false)
         // The initial implementation only exposes native methods to caller-owned inline HTML.
         if (bridgeRequested && html != null) {
@@ -82,7 +90,6 @@ class WebViewActivity : AppCompatActivity() {
         if (html != null) {
             webView.loadDataWithBaseURL("https://local.smarola/", html, "text/html", "UTF-8", null)
         } else {
-            val url = intent.getStringExtra(AppNavigator.EXTRA_URL)
             if (url.isNullOrBlank()) showError("没有可加载的地址") else webView.loadUrl(url)
         }
     }
@@ -150,6 +157,9 @@ class WebViewActivity : AppCompatActivity() {
     }
 
     private inner class Client : WebViewClient() {
+        override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): android.webkit.WebResourceResponse? =
+            request?.let(OfflinePackageManager::intercept) ?: super.shouldInterceptRequest(view, request)
+
         override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
             errorView?.let(content::removeView)
             errorView = null

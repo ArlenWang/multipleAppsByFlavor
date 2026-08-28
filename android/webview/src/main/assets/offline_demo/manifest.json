@@ -1,0 +1,8 @@
+{
+  "packageId": "smarola-offline-demo",
+  "version": "1.0.0",
+  "archive": "smarola-offline-demo-1.0.0.zip",
+  "origin": "https://offline.smarola.local",
+  "basePath": "/demo",
+  "sha256": "d2051f48b6b9cdeb5b4c2587df8a7a50b894ea5caaf24180e43161b152585516"
+}

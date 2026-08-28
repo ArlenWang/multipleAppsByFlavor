@@ -6,6 +6,7 @@ import com.smarola.core.AppNavigator
 import com.smarola.core.AppTab
 import com.smarola.main.DemoUi.action
 import com.smarola.main.DemoUi.infoCard
+import com.smarola.webview.offline.OfflinePackageManager
 
 class WebDemoActivity : BaseBottomTabActivity() {
     override val selectedTab = AppTab.WEB
@@ -14,6 +15,13 @@ class WebDemoActivity : BaseBottomTabActivity() {
         infoCard("基础功能", "标题和进度、错误重试、返回栈、文件选择、系统下载、外部 Scheme 与可选 JS Bridge。")
         action("打开当前 Flavor 默认网页") {
             AppNavigator.openWebView(this@WebDemoActivity, url = AppConfig.from(this@WebDemoActivity).defaultWebUrl)
+        }
+        action("打开离线 ZIP 示例") {
+            AppNavigator.openWebView(
+                this@WebDemoActivity,
+                url = OfflinePackageManager.DEMO_URL,
+                title = "离线包 Demo"
+            )
         }
         action("打开本地 JS Bridge 演示") {
             AppNavigator.openWebView(
